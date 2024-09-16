@@ -1,4 +1,6 @@
 matlabengine==24.1.2
 jupyterlab==4.2.5
-numpy
+numpy~=2.1.1
 matplotlib
+scipy~=1.14.1
+networkx
