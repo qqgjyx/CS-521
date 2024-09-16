@@ -57,18 +57,12 @@ for i = 1:length(egoids)                            % loop over ego node ids
     egofeat{i} = dlmread([f,'.egofeat']);           % add ego feat to accumulator
     feat{i} = dlmread([f,'.feat']);                 % add feat to accumulator
     
-    T = readtable([f, '.featnames'], ...
-        'FileType', 'text', ...
-        'ReadVariableNames', false, ...
-        'Delimiter', '\t', ...    % Adjust based on actual delimiter
-        'Format', '%d %s');       % Use '%d' if feature indices are integers
+    T = readtable([f,'.featnames'], ...             % get featnames
+        'FileType', 'text', ...                     % from text file
+        'ReadVariableNames', false, ...             % no variable names
+        'Format', '%f%s');                          % use this format
     T.Properties.VariableNames = {'Id','Desc'};     % add variable names
     featnames{i} = T;                               % add to accumulator
 end
 
-clearvars -except circles edges feat egofeat featnames graphs egoids
-
-
-% DFW
-% ADJ
-% JUN
+clearvars -except circles edges feat egofeat featnames graphs
