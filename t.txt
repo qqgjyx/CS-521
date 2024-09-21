@@ -1,0 +1,8 @@
+# Directed graph (each unordered pair of nodes is saved once): CA-CondMat.txt
+# Collaboration network of Arxiv Condensed Matter category (there is an edge if authors coauthored at least one paper)
+# Nodes: 23133 Edges: 186936
+# FromNodeId	ToNodeId
+1	4
+1	2
+1	3
+5	6
