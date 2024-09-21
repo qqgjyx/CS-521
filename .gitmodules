@@ -1,3 +1,3 @@
-[submodule "homework1"]
-	path = homework1
-	url = https://github.com/qqgjyx/CS521_homework1.git
+[submodule "overleaf_homework1"]
+	path = overleaf_homework1
+	url = https://github.com/qqgjyx/overleaf_CS521_homework1.git
