@@ -1,3 +1,12 @@
 [submodule "overleaf_homework1"]
 	path = overleaf_homework1
 	url = https://github.com/qqgjyx/overleaf_CS521_homework1.git
+[submodule "pcodes"]
+	path = pcodes
+	url = https://gitlab.oit.duke.edu/cs521_24fa/pcodes.git
+[submodule "overleaf_homework2"]
+	path = overleaf_homework2
+	url = https://github.com/qqgjyx/overleaf_CS521_homework2.git
+[submodule "overleaf_homework2_hanhan"]
+	path = overleaf_homework2_hanhan
+	url = https://github.com/qqgjyx/overlear_MATH462_HW2_Exp_Yihan_Wang.git
