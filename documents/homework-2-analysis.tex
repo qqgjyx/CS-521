@@ -1,0 +1,273 @@
+%
+% HW-2-analysis.tex
+% version to share with the class
+% 
+ \section*{Analysis}
+
+ \begin{enumerate} 
+
+      \item {\bf Review of the Brin-Page model for Page-Ranking
+       (distribution).}
+
+     Let $A\geq 0$ and $B\geq 0 $ be of the same size and column
+     stochastic.  Let $C(\beta) = \beta A + (1-\beta ) B \geq 0$ with
+     the Bernoulli probability $\beta \in (0,1)$.
+            
+     \begin{enumerate}
+     \item { [M/T/F] }
+
+       Matrix $C(\beta)$ is column stochastic, with $\rho(C)=1$. 
+       If both $A$ and $B$ are irreducible, then $C(\beta)$ is
+       irreducible; and vice versa.
+
+       Let $B = be^{\rm T}$ with $b > 0$ and $e^{\rm T}b=1$.  Then,
+       $B$ is irreducible, so is $C(\beta)$.
+       
+     \item Let $B$ be specified as in the previous problem. Let
+       $x_{p} = x_{p}(b,\beta)$ be the Perron-Frobeneous vector of
+       $C(\beta)$.  Which one of the following is a correct
+       description or representation of $x_{p}$, and make a correction
+       if incorrect: 
+
+       \begin{equation}
+         \label{eq:perron-equation}
+         C(\beta) x_{p} = x_{p}
+       \end{equation}
+
+       \begin{equation}
+         \label{eq:power-method-limit}
+         x_{p} = \lim_{k\to \infty} C^k(\beta)x_{0},
+         \quad x_{0} > 0,
+         \quad e^{\rm T}x_{0} = 1. 
+       \end{equation}
+
+       \begin{equation}
+         \label{eq:BP-linear-system}
+         (I - \beta A) x_{p} = (1-\beta) b
+       \end{equation}
+
+       \begin{equation}
+         \label{eq:Neumann-expansion}
+         x_{p} = (1-\beta) \sum_{k=1}^{\infty} \beta^k A^k b
+       \end{equation}
+
+     \item Find a way to prefix the distribution $x_{p}$.
+
+     \item Describe a simple iterative procedure in a finite number of
+       steps to get an approximate $\widehat{x}_{p}$ to $x_{p}$.
+
+     \item Provided a solution $\widehat{x}_{p}$, suggest at least three
+       criteria to assess the expected properties and accuracy.
+
+     \end{enumerate}
+
+   \item { [M/T/F] }
+
+     Use of the Neumann expansion for determining pair-wise
+     reachability
+     \begin{equation}
+       \label{eq:reachbility-matrix} 
+        R_{n} = I + A + A^{2} + \cdots + A^{n-1} 
+     \end{equation}
+     That is, $i$ can be reached by $j$ if and only if
+     $R_{n}(i,j) > 0$.
+     
+     Let $\alpha>0$ be a scalar so that $\alpha \|A\|<1$.  Then
+     $R(\alpha) = \sum_{k=0}^{\infty} (\alpha A)^{k}$ is well defined
+     as the series converges.  Then $ R(\alpha)(i,j) > 0$ if and only
+     if $R_{n}(i,j) > 0$.
+
+     Furthermore, $R(\alpha)$ can be computed as the inverse of
+     $I-\alpha A$.
+
+     {\small Remark: the inverse can be obtained by an LU
+       factorization in $O(n^3)$ operations, the same order as one
+       matrix-matrix product.}
+
+   \item Provide a brief summary within $300$ words on how to use a
+     random-walk approach for node-to-vertex encoding and embedding,
+     discussion with teammates, classmates and ChatGPT is encouraged.
+
+     \newpage
+     
+ \item {\bf Review: what we know of the symmetric eigenvalue problem}
+   (as the base for graph spectral analysis)
+   
+ Let $A$ be an $n\times n$ real-valued symmetric matrix,
+ $A^{\rm H} = A^{\rm T} = A$.  Let $A x_{j} = \lambda_j x_{j}$ be the
+ eigen-pairs, $\lambda_{j} \in \mathbb{C}$ and
+ $ 0 \neq x_{j} \in \mathbb{C}^{n\times 1}$.
+   
+   \begin{enumerate}
+   \item { [M/T/F] }
+       $\lambda_{j} \in \mathbb{R}$ because
+       $x_{j}{\rm H} A x_{j} = \lambda_j x_{j}^{\rm H} x_{j}$
+
+       One can index the eigenvalues in non-descending order,
+       $\lambda_{\min} = \lambda_{1} \leq \lambda_{j} \leq \lambda_{n}
+       = \lambda_{\max}$. 
+       
+     \item { [M/T/F] }
+       $A \text{\rm real}(x_{j}) = \lambda_j \text{\rm real}(x_{j}) $
+       and $A \text{\rm imag}(x_{j}) = \lambda_j \text{\rm imag}(x_{j}) $
+       therefore, the eigenvectors of $A$ can be made real-valued.
+   
+     \item { Prove or disprove the following statement: }
+       If $\lambda_i \neq \lambda_j$, then $x_j^{\rm T} x_j = 0$. 
+
+     \item { [M/T/F] }
+       If the dimension of the invariant subspace of
+       $A$ associated with $\lambda_j$ is greater than $1$. 
+       Assume $Q_j$ be the set of orthonormal vectors
+       spanning the subspace, then $AQ_j = \lambda_j Q_j$.
+
+     \item { Optional. [M/T/F] } For every eigenvalue $\lambda_j$, its
+       geometric multiplicity is equal to its algebraic multiplicity.
+       This implies that $A$ has a complete eigenvector system.
+       
+     \item { [M/T/F] }
+       An EVD of $A$ can be expressed as follows,
+       $A = Q \Lambda Q^{\rm T}$ where $\Lambda$ diagonal and
+       real-valued and $Q$ is orthogonal.
+
+     \item { [M/T/F] }
+       $\|A\|_{F}^2 = \sum_{ij} A^{2} (i,j) = \sum_{j}
+       \lambda^{2}_{j}$ and
+       $\|A\|_2 = \max \{\ |\lambda_{\max}|, |\lambda_{\min}| \ \} $,
+       Consequently, $\|A\|_2 = \lambda_{\max}$ if and only if $A$ is
+       semi-positive definite.
+
+     \item { [M/T/F] } Assume in addition that $A\geq 0$ elementwise,
+       with $d = Ae>0$.  Then the random-walk matrix
+       $A_{\rm w}= AD^{-1}$ is symmetric if and only of $d$ is
+       constant. Nonetheless, $\lambda_{j}(A_{w}) \in \mathbb{R}$.
+       
+     \end{enumerate}
+
+ \item {\bf The normalized graph Laplacians to edge weighted graphs:
+     spectral structures \& applications }
+
+     Let $G(V,E,E)$ be a graph with non-negative edge weights, where
+     $W$ is the weight function, $W:E\to \mathbb{R}_{+}$.  Let $A$ be
+     the adjacency matrix (with edge weights).  Let $B$ be the
+     incidence matrix without edge weights.  Define
+     \begin{equation}
+       B_{w} \triangleq B D_{e}^{1/2},
+       \qquad 
+       L_{w} \triangleq B_{w} B_{w}^{\rm T},
+       \quad 
+       D_{e} = \mbox{diag}(W).
+     \end{equation} 
+     All the Laplacians, above or below, are defined as the gram
+     product of a weighted incidence matrix.
+     
+     \begin{enumerate}
+     \item { [M/T/F] }
+
+       For any $x$, $x^{\rm T}L_{w}x\geq 0$, i.e., $L_{w}$ is
+       semi-positive definite, and $L_{w}e=0$, i.e., $L_{w}$ has zero
+       eigenvalue(s), not positive definite.
+       
+
+     \item { [M/T/F] }
+
+       $L_{w} = D-A$, where
+         $A$ is the weighted adjacency matrix and $D=\mbox{\rm
+        diag}(Ae)$.
+
+     
+     \item { [M/T/F] }
+
+       Graph $G$ is connected if and only if the Fiedler value is positive.
+       Consequently, the Fiedler value of $L$ (unweighted) is nonzero
+       if and only if the Fiedler value of $L_{w}$ is nonzero0.
+
+     \item Let $B_{w} = BD_{e}^{1/2}$. Describe the vertex scaling
+       matrix $D_{v}$ so that $\widehat{B}_{w} = D_v^{-1/2} BD_{e}^{1/2}$
+       is normalized in rows.
+       
+     \item { [M/T/F] }
+
+       Let
+       $\widehat{L}_{w} = \widehat{B}_{w} \widehat{B}_{w}^{\rm T}$.
+       Then, $\widehat{L}_{w} = I - \widehat{A}$, where
+       $\widehat{A} = D_{v}^{-1/2} A D_{v}^{-1/2}$.
+
+       Furthermore,
+       $\lambda_{j}(\widehat{A})$ is real and within $[-1.1]$.
+      
+     \item { [M/T/F] }
+
+       Let $B_{+}$ be the incidence matrix with $B(:,\ell) = e_i+e_j$
+       for $\ell = (i,j) \in E$. Let $B_{+,w} = BD_{e}^{1/2} $. Then,
+       $\widehat{B}_{+,w} = D_{v}^{-1/2}BD_{e}^{1/2} $ is normalized
+       in rows by the same vertex scaling.  Then,
+       $\widehat{L}_{+,w} = I + \widehat{A}$, where
+       $\widehat{L}_{+,w}$ is the Laplacian as the gram product of
+       $\widehat{B}_{+,w}$.
+       
+     \item Give a brief interpretation of element
+       $\widehat{L}_{+}(i,j)$ in terms of neighborhood similarities. 
+       
+     \item Verify (in brief expressions) the following equalities and
+       inequalities
+
+       \begin{equation}
+         \begin{aligned}
+           & \lambda_{j}(\widehat{A} ) 
+           \in [-1.1], \quad j=1:n 
+           \\
+           \widehat{A} & = Q\, \widehat{\Lambda}\,  Q^{\rm T},
+           \quad \Lambda = \mbox{\rm diag}(\lambda_j), 
+           \quad Q^{\rm T}Q = I_{n} 
+           \\
+           \widehat{L}_{w} & = Q (I - \widehat{\Lambda}) Q^{\rm T}
+             \\
+           \widehat{L}_{+,w} &  = Q (I + \widehat{\Lambda}) Q^{\rm T}             
+         \end{aligned} 
+         \end{equation}
+         %
+       \item { [M/T/F] } 
+
+         Let $G$ be connected. Let $d = Ae$ be the degree vector. Then,
+         $d^{1/2}$ is the null eigenvector of $\widehat{L}_{w}$ and
+         the Perron vector of $\widehat{L}_{+,w}$. The Fiedler vector
+         of $\widehat{L}$ is the eigenvector associated with the
+         second largest eigenvalue of $\widehat{L}_{+,w}$. 
+
+         In any spectral approximation of graph $G$ to preserve
+         the neighborhood similarity, it is necessary to preserve
+         at least the two principle eigenvectors of
+         $\widehat{L}_{+,w}$. 
+         
+     \end{enumerate}
+ \item In data-driven, evidence-based research, a frequent issue is to
+   identify a random phenomenon and/or the deviation from it.  List at
+   least three types of random graphs.
+
+ \item[]
+   {\bf \small The following are to initiate more of mental and analytical
+   exercise for class projects.} 
+   
+ \item {\rm Optional.} Describe briefly the (matching) model used in
+   \texttt{isoMap} for mapping graph nodes to vectors in a metric
+   space.
+   
+ \item {\rm Optional.} Describe briefly the (matching ) model used in
+   \texttt{t-SNE} for a point cloud in a high-dimensional space to a
+   point cloud in 2D/3D space. Then use this model to construct a
+   graph.
+
+ \item {\rm Optional.} Describe briefly approach extending the analysis
+   of static graphs to time-varying graphs.
+   
+ \item {\rm Optional.} Describe briefly how to measure the similarity
+   between two neighborhood in a digraph and how to extend the
+   Laplacian spectral analysis of an undirected graph to a digraph.
+
+\end{enumerate} 
+
+%% =================
+%% last revision: Oct. 02, 2024
+%% 
+
