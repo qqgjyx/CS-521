@@ -1,0 +1,227 @@
+% HW-1-analysis.tex
+%
+
+
+
+
+
+\subsection*{Basic notions, notation and convention}
+
+\noindent
+Graph $G = G(V,E)$ 
+\begin{list}{}{} 
+\item $V$: vertex/node set, $n=|V|$ 
+\item $E$: edge/link set, $m=|E|$, $E\subset V\times V$
+\item $G$ is simple if there is at most one edge between any two
+  vertices. 
+\end{list}
+
+\vspace{2em}
+
+\noindent 
+A $k$-partite, $k>1$, is a graph
+$\displaystyle G\left(V=\bigcup_{j=1:k}V_j, \, E = \bigcup_{i\neq j}
+  E_{ij} \right)$ where $E_{ij} \subset V_i\times V_j$ and
+$V_i\cap V_j = \emptyset$ if $i\neq j$.  By the edge set, each vertex
+subset $V_i$ is an independent set.  In particular, a bipartite is a
+graph $G(V_1,V_2, E_{1,2})$ with $E_{12} \subset V_{1} \times V_{2}$.
+% A $k$-partite can be colored with $k$ colors.
+
+\vspace{2em} 
+\noindent 
+A subgraph induced by a vertex subset $U$ is $G(U,E\cap (U\times U))$.
+A bipartite subgraph induced by two non-overlapping vertex sets $V_1$
+and $V_{2}$ is $G( V_1, V_2, E\cap (V_{1}, V_{2}))$.
+
+
+\vspace{2em} 
+\noindent
+Neighborhoods and neighbor graphs of vertex node $v \in V$:
+\begin{list}{}{}
+\item $ \mathcal{N}(v) = \{u: (u,v) \in E, u\neq v  \}$, exclusion of $v$ 
+\item $ \mathcal{N}[v] = \mathcal{N}(v) \cup \{v\} $ , inclusion of $v$
+\item $G(v)$ denotes the subgraph induced by $\mathcal{N}(v)$; 
+  $G[v]$, by $\mathcal{N}[v]$. 
+\end{list}
+
+\vspace{2em} 
+\noindent
+Two basic vertex functions or neighborhood feature descriptors:
+\begin{list}{$\ast$}{} 
+\item $d(v) = |\mathcal{N}(v)|$ is the degree of $v$ is the number of
+\item $\text{lcc}(v)$ is the {\em local cluster coefficient} at vertex
+  $v$ with $d(v)>1$, 
+  %
+  \begin{equation} 
+  \label{eq:local-cluster-coef}
+  \text{lcc}(v)
+  = \frac{ |E ( G(v) ) |  }{  { d(v) \choose  2 }   } \leq 1,
+  \quad
+  d(v) > 1,
+  \quad v \in V.  
+\end{equation}
+%%
+That is, it is is defined as the edge density of the neighbor graph
+$G(v)$. The LCC concept is introduced by D. J. Watts and S. Strogatz
+in 1998.
+\end{list}
+
+\vspace{2em} 
+\noindent 
+The $n\times n$ identify matrix is $I$, with 
+$e_j = I(:,j)$. The constant-1 vector is $e=\sum_{j=1:n}e_j$
+
+\vspace{2em}
+\noindent
+Often, graph operations or relations can be described clearly via
+adjacency matrices. Adjacency matrix $A$ of graph $G$: $A\iff G$
+% 
+\begin{list}{$\circ$}{} % 
+  {\setlength{\leftmargin}{1em}}
+  %
+\item Use a particular vertex-index mapping:
+  $V \to \{ 1, 2, \cdots, n \}$
+\item $A(i,j) \neq 0 \iff (i,j) \in E$,
+  $A(i,i) \neq 0 \iff $ vertex $i$ has a self-loop. 
+\item Each row/column corresponds to a vertex
+  \begin{list}{--}{}% 
+  \item $Ae_j=A(:,j)$: in column-$j$, 
+    the nonzero elements represent the
+    outgoing edges (and the neighbor nodes) from vertex $j$
+  \item $e_{i}^{\rm T}A = A(i,:)$: in row-$i$, 
+    the nonzero elements represent the
+    incoming edges (and the neighbor nodes) from vertex $i$
+  \end{list} 
+\end{list}
+
+\vspace{2em}
+\noindent
+Graph $G$ is also uniquely specified by its incidence matrix $B_{n\times m}$, 
+\begin{equation}
+  \label{eq:incidence-matrix}
+  B(:, \ell) = e_i - e_j,
+  \quad \ell = (i,j) \in E. 
+\end{equation}
+
+\vspace{2em} Hadamard multiplication and division between two arrays of
+the same dimensions are elementwise operations and denoted as
+$\otimes$ (or $.\times$) and $./$ respectively.
+
+  
+\newpage
+
+\section*{Analysis}
+
+Let $G(V,E)$ be a simple, undirected, unweighted, connected graph.
+Assume $A$ is the adjacency matrix of $G$ by some vertex-to-index
+mapping. Then, any subset $U$ of $V$ identifies with a subset of
+$\{\, 1,\cdots, n\, \}$.
+
+\begin{enumerate}
+
+\item  
+  \begin{list}{[T/F/M]}{}
+   \item $A^{\rm T} = A$.
+  \item The subgraph induced by $U \subset V$ is
+    represented by  $A(U,U)$.
+  \item The bipartite subgraph induced by $V_1, V_2 \subset V$,
+    $V_1\cap V_2 = \emptyset$, is represented by $A(V_1,V_2)$.
+   \item without self-loops, $m = {\rm nnz}(A)/2$.
+   \item without self-loops, the number of vertices with odd degrees
+     is even. \\ {\tt (The handshaking lemma)}
+ \end{list}
+
+
+\item Neighborhood. 
+
+  \begin{list}{[T/F/M]}{}
+  \item At any vertex $v$, ${\cal N}[v] $ is not an independent set,
+    whereas ${\cal N}(v) $ may be an independent set.
+  \item If $G[v]$ is a clique, so is $G(v)$, and vice versa.
+
+  \end{list}
+
+\item Triangles incident at vertex $v$ and neighborhood graph $G(v)$.
+    
+  \begin{list}{[T/F/M]}{}  
+
+  \item Every edge between two neighbors of $v$ is the base of a
+    triangle incident at $v$.
+    
+  \item Denote by $\# C_{3}(v)$ the
+    total number of triangles incident at node $v$. Then, 
+    \[ \# C_3(v) = | E( G(v) ) | \leq {d(v) \choose 2} . \]
+
+    By the equality, the LCC coefficient is the ratio of the existing
+    number of triangles incident at $v$ to the number of all
+    potentially possible triangles incident at $v$.
+  
+    \item[Optional.] An Mycielski graph is triangle-free by
+      construction.  It has the largest edge set size among
+      triangle-free graphs of the same size.
+    \item[Optional.] Find or construct at least three more (types of)
+      triangle-free graphs, not including star graphs or Mycielski
+      graphs.
+  \end{list}  
+    
+\item Degree expression and LCC expressions via matrix-vector
+  operations,
+    % 
+    \begin{list}{[T/F/M]}{} 
+    \item 
+      \begin{equation}
+         d = d(1:n) = A \, e  
+      \end{equation}
+    \item   
+    \begin{equation}
+      \label{eq:LCC-formula-A2}
+      \mbox{\rm lcc}(1:n)  = 2 [ {\rm diag}( A^3 ) e] \, ./(d\odot(d-1) )
+    \end{equation}
+   \item 
+    \begin{equation}
+      \label{eq:LCC-formula-A3}
+      \mbox{\rm lcc}(1:n) = [A^2 \odot A ) e]\, ./\, ({ d\odot (d-1)) }. 
+    \end{equation}
+  \end{list}
+  
+\item {[T/F/M]} Connectivity and reachability.  Given that $G$ is
+  connected, for any pair of vertices $u$ and $v$, there exists an
+  integer $k$, $k\leq \text{diam}(G)$, such that
+  $R_k(i,j) = [ \sum_{j=1:k}A^{j} ] ( u,v ) > 0$.
+  
+  
+\item Determine the length of the shortest path(s) between any pair of
+  nodes $u,v \in V$ by the sequence
+  $\{ A^k(u,v), k=1,2,\cdots, n-1 \}$.
+
+\item   Verify the following relationship between the degree vector,
+  the adjacency matrix and the incidence matrix, equalities,
+  \begin{equation}
+    \label{eq:graph-Laplace} 
+    \begin{aligned} 
+    BB^{\rm T} = \text{diag}(d) - A,
+    \quad
+    d = A\,e
+    \end{aligned} 
+  \end{equation} 
+  The gram (product) matrix $BB^{\rm T}$ is actually the Laplacian
+  matrix of graph $G$ and denoted as $L$.
+
+\item {[Optional to undergrads.]}  Verify that the following quadratic
+  function on a connected graph $G$ is nonnegative,
+  \begin{equation}
+    x^{\rm T} L x \geq 0.
+  \end{equation}
+  The equality holds if and only if $x$ is a constant vector. 
+\end{enumerate}
+
+
+
+  
+% ==================
+% CS-521/321
+% Xiaobai Sun
+% Aug-Sept. 2023
+% ==================
+
+

@@ -1,0 +1,34 @@
+READme
+
+
+Under this directory there are
+
+Datasets
+========
+
+Built-in :  Bucky, Airfoil
+Generated:  CYCLEs, HyperCubes, GrapheneSheets 
+
+Analytic Functions
+==================
+
+Walk on a graph
+
+3D graph plotting
+
+Laplacian spectral embedding : dense version and sparse version
+
+Demo Scripts
+============
+
+Demonstrate the analytic functions on the chosen datasets
+
+----------------------------------------------------------------------
+
+Xiaobai Sun
+
+Contact Xiaobai before any use of out-class projects
+
+
+
+

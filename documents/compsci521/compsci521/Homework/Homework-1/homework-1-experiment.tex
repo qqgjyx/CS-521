@@ -1,0 +1,121 @@
+%
+% HW-1-experiment.tex
+% 
+
+\section*{Experiments}
+
+
+\begin{enumerate}
+\item Objective: data gathering and initial inspection.
+  \begin{list}{$\circ$}{}
+  \item gather at least $3$ connected real-world networks, each with
+    at least $1,000$ nodes.
+
+    Use a provided name or give a name to each network, describe
+    briefly the semantic meaning of the vertices and edges for each
+    network $G(V,E)$, and cite the data sources.
+    
+  \item format conversion from the incidence matrix to the adjacency
+    matrix, 
+  \item make a summary table of the networks with the basic feature
+    elements $n=|V|$, directed/undirected, weighted/unweighted,
+    $m=|V|$, $\max(d_{\rm in})$, $\min(d_{\min})$,
+    $\text{\rm avg}(d)$, degree-distribution type, and diameter (if
+    available or inexpensive to compute).
+  \end{list}
+  
+  For each network,
+  \begin{list}{$\circ$}{}
+  \item plot a histogram for the degree
+    distribution,  
+  \item plot a histogram for the \text{lcc}
+    distribution. 
+  \end{list} 
+
+  ($\ast$) One can use or modify the provided {\sc matlab} codes, or
+  other available and reliable codes, for computing the degrees and
+  the local cluster coefficients and displaying their {\sc pdf}
+  histograms. Each histogram has at least $10$ bins.
+    
+\item Objective: construction of a related network.
+
+  Let $G_{1} = G(V,E)$ be an undirected, unweighted graph at
+  input. Let $G_{k}=G(V,E_{k}) $ be the constructed graph at output
+  with an integer parameter $k$, $k>1$,
+  \[
+    (u,v) \in E_{k} \iff (v_{j}, v_{j-1}) \in E,
+    \qquad 1\leq j \leq k,
+    \qquad v_0 = v, \quad v_k = u, 
+  \] 
+  where no vertex is visited more than once.  In other words, $G_{k}$
+  describes the $k$-step connectivity.
+    
+  \begin{list}{$\circ$}{}
+  \item For each real-world network $G_{1}$ gathered for the preceding
+    problem, generate $G_2$ (hint: get the adjacency matrix $A_2$ from
+    $A_1$),
+  \item Show the difference of $G_2$ from $G_1$ in degree distribution
+    and {\sc lcc} distribution.
+  \end{list}
+  
+\item Objective: get familiar with $5$ types of synthetic
+  graphs/networks:
+  \begin{enumerate}
+  \item Erd\"{0}s and R\'{e}nyi (ER) graphs, 
+  \item  Watts and Strogatz (WS), a.k.a., small-world graphs      
+  \item Barab\'{a}si and Albert (BA), a.k.a., scale-free graphs 
+  \item Geometric random (GR) graphs 
+  \item Topologically determined graphs (vs random or stochastic) 
+  \end{enumerate} 
+  
+  To do: 
+  \begin{list}{$\circ$}{\leftmargin=2pt}
+  \item make a summary table of
+   the datasets provided by the function {\tt
+    select\_graph\_matrix\_A}.
+\item plot the degree and {\sc lcc} distributions
+  and comment on distinct signatures
+  %% use or modify {\tt demo\_distribuionbs\_and\_maps}.
+  \end{list}
+
+  \newpage
+  
+\item Objective: graph representation of feature data
+  points/vectors in a metric space. Let $k$ be a positive
+  integer parameter. 
+
+  \begin{list}{$\circ$}{\leftmargin=2pt}
+  \item gather at least three sets of feature data vectors
+  \item construct $k$-neighbor graphs for each, assuming
+    the conventional Euclidean distance (the out-degree is constant $k$)
+  \item plot the in-degree distribution
+
+  \item {[Optional:]} propose (and name) a local density measure
+    similar to {\sc lcc} for undirected graphs, and plot a histogram
+    of the proposed density measure.
+  \end{list}
+  
+  
+\item Objective: get familiar with the use of graph Laplacian
+  spectrum.
+  
+  Assume graph $G$ is undirected and connected.
+
+  To experiment: 
+  \begin{list}{$\triangleright$}{\leftmargin=2pt}
+  \item Graph cut by the Fiedler vector: use the demo script {\tt
+      demo\_Fiedler\_pair/m} on two datasets and make brief inspection
+      comments. 
+    \item Graph embedding in a spectral subspace: use the demo script
+      {\tt demo\_Laplacian\_embedding.m} for low-dimensional embedding
+      and make brief inspection comments.
+    \item {[Optional to undergrads.]}  Apply the Fiedler cut to a
+      real-world network.
+    \item {[Optional.]} Apply the Laplacian embedding to a real-world
+      network.
+  \end{list} 
+  
+\end{enumerate}
+%
+
+
